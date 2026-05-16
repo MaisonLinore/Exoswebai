@@ -413,7 +413,7 @@ setInterval(fetchNews, 60000);
         resultDiv.innerHTML = "";
     });
 
-    // Auto-trigger "who are you?" if default prompt
+    // Auto-trigger "Prompt News" if default prompt
     if (document.getElementById('userPrompt').value.trim().toLowerCase() === "who are you?") {
         setTimeout(() => { sendBtn.click(); }, 500);
     }
