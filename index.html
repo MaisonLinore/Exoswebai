@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Exos+ Agentic AI | Global Intelligence Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-image: url('IMG_20260516_000225.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: #eef5ff;
+            min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(3px);
+            z-index: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        /* Header */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(72, 187, 255, 0.3);
+        }
+        .datetime {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            border: 1px solid rgba(59,130,246,0.5);
+        }
+        .market-widgets { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .market-card {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59,130,246,0.5);
+        }
+        .positive { color: #22c55e; }
+        .header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .logo h1 {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 1.9rem;
+            background: linear-gradient(135deg, #fff, #80b3ff, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .badge {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(59,130,246,0.6);
+        }
+        /* Page 1 - Input */
+        .page { transition: opacity 0.3s; }
+        .page-hidden { display: none; }
+        .input-card {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            background: rgba(10,20,35,0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(72,187,255,0.35);
+            padding: 1.5rem;
+        }
+        textarea, input {
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #3a5a7a;
+            border-radius: 1.2rem;
+            padding: 0.8rem 1rem;
+            color: white;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        button {
+            background: linear-gradient(95deg, #0f2b4f, #041a2f);
+            border: 1px solid #3b82f6;
+            color: white;
+            font-weight: 600;
+            padding: 0.8rem;
+            border-radius: 2rem;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        button:hover { background: #1e3a6b; box-shadow: 0 0 10px #3b82f6; }
+        /* Page 2 - Result */
+        .result-page {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 2rem;
+            border: 1px solid #3b82f6;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .back-btn {
+            background: rgba(59,130,246,0.2);
+            border: 1px solid #3b82f6;
+            padding: 0.4rem 1.2rem;
+            border-radius: 2rem;
+            cursor: pointer;
+        }
+        .result-content {
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            padding: 1rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 1rem;
+            flex: 1;
+        }
+        /* News & TV grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 900px) { .info-grid { grid-template-columns: 1fr; } }
+        .info-card {
+            background: rgba(10,20,35,0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(72,187,255,0.35);
+            padding: 1rem;
+        }
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            border-left: 3px solid #3b82f6;
+            padding-left: 0.8rem;
+        }
+        .news-list { list-style: none; }
+        .news-list li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(72,187,255,0.2);
+        }
+        .news-title { font-size: 0.85rem; }
+        .news-source { font-size: 0.7rem; color: #8aa9d6; }
+        .tv-frame iframe { width: 100%; height: 200px; border-radius: 1rem; border: none; }
+        .footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; }
+        .loading { display: none; text-align: center; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-top">
+        <div class="datetime" id="datetime"></div>
+        <div class="market-widgets">
+            <div class="market-card"><i class="fas fa-chart-line"></i> Forex: <span id="forex">EUR/USD +0.12%</span></div>
+            <div class="market-card"><i class="fas fa-chart-simple"></i> S&P 500: <span id="sp500">+0.45%</span></div>
+            <div class="market-card"><i class="fas fa-chart-simple"></i> Dow: <span id="dow">+0.32%</span></div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="logo"><h1>EXOS+ Agentic AI</h1><p>Global Intelligence Hub</p></div>
+        <div class="badge"><i class="fas fa-shield-alt"></i> IP Edwin Mirfazli</div>
+    </div>
+
+    <!-- PAGE 1: INPUT -->
+    <div id="page1" class="page">
+        <div class="input-card">
+            <textarea id="userPrompt" rows="3" placeholder="Ask anything...">who are you?</textarea>
+            <input type="password" id="apiKeyInput" placeholder="Enter your Gemini API Key (from Google AI Studio)">
+            <div class="file-label" style="text-align:center; margin-bottom:1rem; cursor:pointer; background:rgba(0,0,0,0.5); padding:0.5rem; border-radius:2rem;" onclick="document.getElementById('imageInput').click()">
+                <i class="fas fa-image"></i> Attach image (optional)
+            </div>
+            <input type="file" id="imageInput" accept="image/*" style="display:none">
+            <div id="imagePreview" style="text-align:center; margin-bottom:1rem;"></div>
+            <button id="sendBtn"><i class="fas fa-bolt"></i> Activate Intelligence</button>
+            <div class="loading" id="loadingIndicator"><i class="fas fa-spinner fa-pulse"></i> Consulting Gemini 2.5 Flash...</div>
+        </div>
+
+        <!-- News & TV di bawah input (tetap terlihat) -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="section-title"><i class="fas fa-globe"></i> Latest News</div>
+                <ul class="news-list" id="newsList"><li>Loading news...</li></ul>
+            </div>
+            <div class="info-card">
+                <div class="section-title"><i class="fas fa-tv"></i> Live Stream</div>
+                <div class="tv-frame">
+                    <iframe src="https://www.youtube.com/embed/live_stream?channel=UCupvZG-5ko_eiXAupbDfxWw" allowfullscreen></iframe>
+                </div>
+                <div style="font-size:0.7rem; text-align:center;">CNN International Live (free embed)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: RESULT (hidden initially) -->
+    <div id="page2" class="page page-hidden">
+        <div class="result-page">
+            <div class="result-header">
+                <div><i class="fas fa-newspaper"></i> <strong>Synthesized Intelligence</strong></div>
+                <div class="back-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back</div>
+            </div>
+            <div id="resultContent" class="result-content"></div>
+        </div>
+        <div class="footer"><i class="fas fa-copyright"></i> Exos+ Agentic AI News</div>
+    </div>
+    <div class="footer" style="margin-top:1rem;">Real-time intelligence · Gemini 2.5 Flash</div>
+</div>
+
+<script>
+    // ========================
+    // 1. HELPER FUNCTIONS
+    // ========================
+    const MODEL = "gemini-2.5-flash";
+    let currentImageBase64 = null;
+    let currentMimeType = null;
+
+    // Preview image
+    document.getElementById('imageInput').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        const preview = document.getElementById('imagePreview');
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                preview.innerHTML = `<img src="${ev.target.result}" style="max-height:100px; border-radius:12px;">`;
+                currentImageBase64 = ev.target.result.split(',')[1];
+                currentMimeType = file.type;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.innerHTML = '';
+            currentImageBase64 = null;
+        }
+    });
+
+    // Clock & date
+    function updateDateTime() {
+        const now = new Date();
+        document.getElementById('datetime').innerHTML = `<i class="far fa-calendar-alt"></i> ${now.toLocaleString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' })}`;
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // Simulasi market (bisa diganti nanti)
+    function updateMarket() {
+        // just static for demo
+    }
+    setInterval(updateMarket, 30000);
+
+    // Fetch news from free API (no key)
+    async function fetchNews() {
+        const newsList = document.getElementById('newsList');
+        try {
+            const res = await fetch('https://news.ictinnovations.com/api/v1/news?limit=3');
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            if (data.articles && data.articles.length) {
+                newsList.innerHTML = data.articles.slice(0,3).map(a => `<li><div class="news-title">${a.title}</div><div class="news-source">${a.source.name}</div></li>`).join('');
+            } else throw new Error();
+        } catch(e) {
+            newsList.innerHTML = `<li><div class="news-title">AI Summit 2026: Global Leaders Sign Ethics Pact</div><div class="news-source">Reuters</div></li>
+                                  <li><div class="news-title">Tech Stocks Rally on Strong Earnings</div><div class="news-source">Bloomberg</div></li>
+                                  <li><div class="news-title">EU Approves Landmark AI Regulation</div><div class="news-source">BBC</div></li>`;
+        }
+    }
+    fetchNews();
+    setInterval(fetchNews, 60000);
+
+    // Gemini API call (with optional image)
+    async function callGemini(prompt, apiKey, imageBase64, mimeType) {
+        let parts = [{ text: prompt }];
+        if (imageBase64 && mimeType) {
+            parts.push({ inline_data: { mime_type: mimeType, data: imageBase64 } });
+        }
+        const payload = {
+            contents: [{ parts }],
+            generationConfig: { temperature: 0.7, maxOutputTokens: 1000 }
+        };
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
+        const resp = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (!resp.ok) {
+            const err = await resp.json();
+            throw new Error(`API Error ${resp.status}: ${err.error?.message || 'Unknown'}`);
+        }
+        const data = await resp.json();
+        let text = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
+        // Custom response for "who are you?"
+        if (prompt.toLowerCase().includes("who are you")) {
+            text = "I am Exos+ Agentic AI News, your global intelligence hub for real-time analysis, market insights, and executive briefings. How can I assist you today?";
+        }
+        return text;
+    }
+
+    // Page switching
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const sendBtn = document.getElementById('sendBtn');
+    const backBtn = document.getElementById('backBtn');
+    const resultDiv = document.getElementById('resultContent');
+    const loading = document.getElementById('loadingIndicator');
+
+    sendBtn.addEventListener('click', async () => {
+        const apiKey = document.getElementById('apiKeyInput').value.trim();
+        if (!apiKey) {
+            alert("Please enter your Gemini API Key.");
+            return;
+        }
+        const prompt = document.getElementById('userPrompt').value.trim();
+        if (!prompt) {
+            alert("Please enter a question.");
+            return;
+        }
+        loading.style.display = 'block';
+        sendBtn.disabled = true;
+        try {
+            const answer = await callGemini(prompt, apiKey, currentImageBase64, currentMimeType);
+            resultDiv.innerHTML = `<i class="fas fa-gem"></i> <strong>Exos+ Intelligence</strong><br><br>${answer.replace(/\n/g,'<br>')}`;
+            page1.classList.add('page-hidden');
+            page2.classList.remove('page-hidden');
+        } catch (err) {
+            alert("Error: " + err.message);
+        } finally {
+            loading.style.display = 'none';
+            sendBtn.disabled = false;
+        }
+    });
+
+    backBtn.addEventListener('click', () => {
+        page2.classList.add('page-hidden');
+        page1.classList.remove('page-hidden');
+        resultDiv.innerHTML = "";
+        // optional: reset image preview
+    });
+
+    // Auto-trigger "who are you?" jika prompt default
+    if (document.getElementById('userPrompt').value.trim().toLowerCase() === "who are you?") {
+        setTimeout(() => { sendBtn.click(); }, 500);
+    }
+</script>
+</body>
+</html>
