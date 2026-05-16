@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Exos+ Grid | AI, News, Sports & Entertainment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0f1e;
+            font-family: 'Inter', sans-serif;
+            color: #eef5ff;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #fff, #80b3ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .back-btn {
+            display: inline-block;
+            background: rgba(59,130,246,0.2);
+            border: 1px solid #3b82f6;
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover {
+            background: #3b82f6;
+            box-shadow: 0 0 8px #3b82f6;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+        .card-btn {
+            background: rgba(10, 20, 35, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(72, 187, 255, 0.3);
+            border-radius: 1.2rem;
+            padding: 0.8rem;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .card-btn:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            background: rgba(59,130,246,0.2);
+        }
+        .ai-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .ai-btn {
+            background: linear-gradient(135deg, #1e2a5e, #0f172a);
+            border: 1px solid #3b82f6;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            min-width: 140px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #a0b8e0;
+        }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .ai-btn { min-width: auto; padding: 0.6rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div style="text-align: center;">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Landing Page</a>
+    </div>
+    <h1>Exos+ Grid <i class="fas fa-th"></i></h1>
+
+    <!-- AI CHAT SECTION -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-robot"></i> AI Chat</div>
+        <div class="ai-grid">
+            <a href="https://chat.deepseek.com/" target="_blank" class="card-btn ai-btn"><i class="fas fa-comment-dots"></i> DeepSeek</a>
+            <a href="https://gemini.google.com/" target="_blank" class="card-btn ai-btn"><i class="fas fa-star"></i> Gemini</a>
+            <a href="https://claude.ai/" target="_blank" class="card-btn ai-btn"><i class="fas fa-brain"></i> Claude</a>
+            <a href="https://grok.x.ai/" target="_blank" class="card-btn ai-btn"><i class="fas fa-chart-line"></i> Grok</a>
+            <a href="https://chat.openai.com/" target="_blank" class="card-btn ai-btn"><i class="fas fa-comment"></i> ChatGPT</a>
+        </div>
+    </div>
+
+    <!-- NEWS SECTION -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-newspaper"></i> News Sources</div>
+        <div class="grid">
+            <a href="https://www.cnn.com/" target="_blank" class="card-btn">CNN</a>
+            <a href="https://time.com/" target="_blank" class="card-btn">Time</a>
+            <a href="https://www.theguardian.com/" target="_blank" class="card-btn">The Guardian</a>
+            <a href="https://www.aljazeera.com/" target="_blank" class="card-btn">Al Jazeera</a>
+            <a href="https://www.economist.com/" target="_blank" class="card-btn">The Economist</a>
+            <a href="https://www.washingtonpost.com/" target="_blank" class="card-btn">Washington Post</a>
+            <a href="https://www.detik.com/" target="_blank" class="card-btn">Detik</a>
+            <a href="https://www.artificialintelligence-news.com/" target="_blank" class="card-btn">AI News</a>
+            <a href="https://www.bloomberg.com/" target="_blank" class="card-btn">Bloomberg</a>
+            <a href="https://www.cnbc.com/" target="_blank" class="card-btn">CNBC</a>
+            <a href="https://www.bbc.com/news" target="_blank" class="card-btn">BBC</a>
+        </div>
+    </div>
+
+    <!-- SPORTS SECTION -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-futbol"></i> Sports</div>
+        <div class="grid">
+            <a href="https://www.skysports.com/" target="_blank" class="card-btn">Sky Sports</a>
+            <a href="https://www.foxsports.com/" target="_blank" class="card-btn">Fox Sports</a>
+            <a href="https://bleacherreport.com/" target="_blank" class="card-btn">Bleacher Report</a>
+            <a href="https://www.espn.com/" target="_blank" class="card-btn">ESPN</a>
+            <a href="https://www.formula1.com/" target="_blank" class="card-btn">Formula 1</a>
+            <a href="https://www.motogp.com/" target="_blank" class="card-btn">MotoGP</a>
+            <a href="https://www.hbo.com/boxing" target="_blank" class="card-btn">HBO Boxing</a>
+            <a href="https://www.premierleague.com/" target="_blank" class="card-btn">Premier League</a>
+            <a href="https://www.uefa.com/uefachampionsleague/" target="_blank" class="card-btn">UEFA Champions League</a>
+            <a href="https://www.fifa.com/" target="_blank" class="card-btn">FIFA</a>
+            <a href="https://www.livescore.com/" target="_blank" class="card-btn">Football Live Score</a>
+        </div>
+    </div>
+
+    <!-- ENTERTAINMENT SECTION -->
+    <div class="section">
+        <div class="section-title"><i class="fas fa-film"></i> Entertainment</div>
+        <div class="grid">
+            <a href="https://www.vogue.com/fashion" target="_blank" class="card-btn">Fashion</a>
+            <a href="https://www.hollywoodreporter.com/" target="_blank" class="card-btn">Hollywood</a>
+            <a href="https://www.universalstudios.com/" target="_blank" class="card-btn">Universal Studio</a>
+            <a href="https://www.history.com/" target="_blank" class="card-btn">History</a>
+            <a href="https://www.usmagazine.com/category/celebrity-news/" target="_blank" class="card-btn">Celebrity News</a>
+            <a href="https://www.mgm.com/" target="_blank" class="card-btn">MGM</a>
+            <a href="https://www.fox.com/" target="_blank" class="card-btn">Fox</a>
+            <a href="https://www.vogue.com/" target="_blank" class="card-btn">Vogue</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <i class="fas fa-copyright"></i> Exos+ Grid | Part of Exos+ Agentic AI News
+    </div>
+</div>
+</body>
+</html>
