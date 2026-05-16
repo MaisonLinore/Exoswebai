@@ -294,13 +294,13 @@
     // Fetch news from free API (no key)
     async function fetchNews() {
     const newsList = document.getElementById('newsList');
+    
     try {
-        // Mengambil data berita global langsung dari API
+        // 1. Coba ambil dari API Utama
         const res = await fetch('https://news.ictinnovations.com/api/v1/news?limit=3');
-        if (!res.ok) throw new Error();
+        if (!res.ok) throw new Error("Primary API Failed");
         const data = await res.json();
         
-        // Memastikan data bawaan dari API ada dan strukturnya sesuai
         if (data.articles && data.articles.length) {
             newsList.innerHTML = data.articles.slice(0, 3).map(a => `
                 <li style="list-style: none;">
@@ -310,37 +310,40 @@
                     </a>
                 </li>
             `).join('');
+            return; // Sukses, langsung keluar dari fungsi
         } else {
-            throw new Error();
+            throw new Error("No articles found");
         }
     } catch(e) {
-        // Fallback cadangan berkualitas tinggi jika API utama gagal terhubung
-        newsList.innerHTML = `
-            <li style="list-style: none;">
-                <a href="https://www.reuters.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="news-title">AI Summit 2026: Global Leaders Sign Ethics Pact</div>
-                    <div class="news-source">Reuters</div>
-                </a>
-            </li>
-            <li style="list-style: none;">
-                <a href="https://www.bloomberg.com" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="news-title">Tech Stocks Rally on Strong Earnings</div>
-                    <div class="news-source">Bloomberg</div>
-                </a>
-            </li>
-            <li style="list-style: none;">
-                <a href="https://www.bbc.com/news" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="news-title">EU Approves Landmark AI Regulation</div>
-                    <div class="news-source">BBC</div>
-                </a>
-            </li>`;
+        console.warn("Switching to backup live feed...", e.message);
+        
+        // 2. BACKUP OTOMATIS: Jika API utama down, ambil live feed asli dari BBC World News
+        try {
+            const backupRes = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://feeds.bbci.co.uk/news/world/rss.xml')}`);
+            if (!backupRes.ok) throw new Error();
+            const backupData = await backupRes.json();
+            
+            if (backupData.items && backupData.items.length) {
+                newsList.innerHTML = backupData.items.slice(0, 3).map(item => `
+                    <li style="list-style: none;">
+                        <a href="${item.link}" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                            <div class="news-title">${item.title}</div>
+                            <div class="news-source">BBC World News</div>
+                        </a>
+                    </li>
+                `).join('');
+            }
+        } catch(backupError) {
+            // Jika koneksi internet benar-benar putus total
+            newsList.innerHTML = `<li style="list-style: none;"><div class="news-title">Failed to load live feeds. Check connection.</div><div class="news-source">System Error</div></li>`;
+        }
     }
 }
 
-// Jalankan saat pertama kali halaman dimuat
+// Eksekusi & interval update bawaan
 fetchNews();
-// Otomatis memperbarui berita bawaan API setiap 60 detik
 setInterval(fetchNews, 60000);
+
 
     // Gemini API call (with optional image)
     async function callGemini(prompt, apiKey, imageBase64, mimeType) {
