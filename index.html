@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<title>Exos+ Agentic AI | Global Intelligence Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background-image:url('IMG_20260516_000225.jpg');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+font-family:'Inter',sans-serif;
+color:#eef5ff;
+min-height:100vh;
+position:relative;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.65);
+backdrop-filter:blur(3px);
+z-index:0;
+}
+
+.container{
+max-width:1400px;
+margin:0 auto;
+padding:1.5rem;
+position:relative;
+z-index:2;
+}
+
+.header-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:1rem;
+margin-bottom:1rem;
+padding-bottom:0.5rem;
+border-bottom:1px solid rgba(72,187,255,0.3);
+}
+
+.datetime{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+padding:0.4rem 1rem;
+border-radius:2rem;
+font-size:0.85rem;
+border:1px solid rgba(59,130,246,0.5);
+}
+
+.market-widgets{
+display:flex;
+gap:1rem;
+flex-wrap:wrap;
+}
+
+.market-card{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+padding:0.3rem 1rem;
+border-radius:2rem;
+font-size:0.8rem;
+border:1px solid rgba(59,130,246,0.5);
+transition:0.3s;
+}
+
+.market-card:hover{
+transform:scale(1.05);
+box-shadow:0 0 10px #3b82f6;
+}
+
+.header-bottom{
+display:flex;
+justify-content:space-between;
+align-items:flex-end;
+flex-wrap:wrap;
+margin-bottom:2rem;
+}
+
+.logo h1{
+font-family:'Space Grotesk',monospace;
+font-size:1.9rem;
+background:linear-gradient(135deg,#fff,#80b3ff,#3b82f6);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+}
+
+.badge{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(8px);
+padding:0.4rem 1rem;
+border-radius:40px;
+font-size:0.75rem;
+border:1px solid rgba(59,130,246,0.6);
+}
+
+.page-hidden{
+display:none;
+}
+
+.input-card{
+max-width:800px;
+margin:0 auto 2rem auto;
+background:rgba(10,20,35,0.6);
+backdrop-filter:blur(12px);
+border-radius:1.5rem;
+border:1px solid rgba(72,187,255,0.35);
+padding:1.5rem;
+}
+
+textarea,input{
+width:100%;
+background:rgba(0,0,0,0.5);
+border:1px solid #3a5a7a;
+border-radius:1.2rem;
+padding:0.8rem 1rem;
+color:white;
+font-family:monospace;
+font-size:0.9rem;
+margin-bottom:1rem;
+}
+
+button{
+background:linear-gradient(95deg,#0f2b4f,#041a2f);
+border:1px solid #3b82f6;
+color:white;
+font-weight:600;
+padding:0.8rem;
+border-radius:2rem;
+width:100%;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+button:hover{
+background:#1e3a6b;
+box-shadow:0 0 10px #3b82f6;
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:1.5rem;
+margin-top:2rem;
+}
+
+@media (max-width:900px){
+
+.info-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+.info-card{
+background:rgba(10,20,35,0.6);
+backdrop-filter:blur(12px);
+border-radius:1.5rem;
+border:1px solid rgba(72,187,255,0.35);
+padding:1rem;
+}
+
+.section-title{
+font-size:1rem;
+font-weight:600;
+margin-bottom:0.8rem;
+border-left:3px solid #3b82f6;
+padding-left:0.8rem;
+}
+
+.news-list{
+list-style:none;
+}
+
+.news-list li{
+margin-bottom:0.8rem;
+padding-bottom:0.5rem;
+border-bottom:1px solid rgba(72,187,255,0.2);
+}
+
+.news-title{
+font-size:0.85rem;
+line-height:1.3;
+}
+
+.news-source{
+font-size:0.7rem;
+color:#8aa9d6;
+margin-top:2px;
+}
+
+.tv-tabs{
+display:flex;
+gap:4px;
+margin-bottom:8px;
+overflow-x:auto;
+white-space:nowrap;
+padding-bottom:4px;
+}
+
+.tv-tab{
+background:rgba(0,0,0,0.4);
+border:1px solid rgba(59,130,246,0.4);
+color:#8aa9d6;
+font-size:0.7rem;
+padding:0.3rem 0.6rem;
+border-radius:4px;
+cursor:pointer;
+flex:1;
+text-align:center;
+transition:0.3s;
+}
+
+.tv-tab.active{
+background:rgba(59,130,246,0.3);
+color:#fff;
+border-color:#3b82f6;
+}
+
+.tv-frame video,
+.tv-frame iframe{
+width:100%;
+height:240px;
+border-radius:1rem;
+border:none;
+background:black;
+}
+
+.loading{
+display:none;
+text-align:center;
+margin-top:0.5rem;
+}
+
+.result-page{
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(15px);
+border-radius:2rem;
+border:1px solid #3b82f6;
+padding:1.5rem;
+display:flex;
+flex-direction:column;
+max-height:80vh;
+}
+
+.result-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:1rem;
+}
+
+.back-btn{
+background:rgba(59,130,246,0.2);
+border:1px solid #3b82f6;
+padding:0.4rem 1.2rem;
+border-radius:2rem;
+cursor:pointer;
+width:auto;
+}
+
+.result-content{
+overflow-y:auto;
+white-space:pre-wrap;
+line-height:1.5;
+padding:1rem;
+background:rgba(0,0,0,0.3);
+border-radius:1rem;
+flex:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header-top">
+
+<div class="datetime" id="datetime"></div>
+
+<div class="market-widgets" id="marketWidgets">
+
+<div class="market-card">
+<i class="fas fa-chart-line"></i>
+Forex:
+<span id="forex">EUR/USD +0.12%</span>
+</div>
+
+<div class="market-card">
+<i class="fas fa-chart-simple"></i>
+S&P 500:
+<span id="sp500">+0.45%</span>
+</div>
+
+<div class="market-card">
+<i class="fas fa-chart-simple"></i>
+Dow:
+<span id="dow">+0.32%</span>
+</div>
+
+</div>
+</div>
+
+<div class="header-bottom">
+
+<div class="logo">
+<h1>EXOS+ Agentic AI</h1>
+<p>Global Intelligence Hub</p>
+</div>
+
+<div class="badge">
+<i class="fas fa-shield-alt"></i>
+IP Edwin Mirfazli
+</div>
+
+</div>
+
+<div id="page1">
+
+<div class="input-card">
+
+<textarea id="userPrompt"
+rows="3"
+placeholder="Ask anything...">Prompt News</textarea>
+
+<input type="password"
+id="apiKeyInput"
+placeholder="Enter Gemini API Key">
+
+<div style="text-align:center;margin-bottom:1rem;cursor:pointer;background:rgba(0,0,0,0.5);padding:0.5rem;border-radius:2rem;"
+onclick="document.getElementById('imageInput').click()">
+
+<i class="fas fa-image"></i>
+Attach image
+
+</div>
+
+<input type="file"
+id="imageInput"
+accept="image/*"
+style="display:none">
+
+<div id="imagePreview"
+style="text-align:center;margin-bottom:1rem;"></div>
+
+<button id="sendBtn">
+<i class="fas fa-bolt"></i>
+Activate Intelligence
+</button>
+
+<div class="loading" id="loadingIndicator">
+<i class="fas fa-spinner fa-pulse"></i>
+Analyzing...
+</div>
+
+</div>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<div class="section-title">
+<i class="fas fa-globe"></i>
+Live News
+</div>
+
+<ul class="news-list" id="newsList">
+<li>Loading news...</li>
+</ul>
+
+</div>
+
+<div class="info-card">
+
+<div class="section-title">
+<i class="fas fa-tv"></i>
+Live Stream
+</div>
+
+<div class="tv-tabs">
+
+<div class="tv-tab active"
+onclick="changeChannel(0,this)">
+RedBull
+</div>
+
+<div class="tv-tab"
+onclick="changeChannel(1,this)">
+DW
+</div>
+
+<div class="tv-tab"
+onclick="changeChannel(2,this)">
+NASA
+</div>
+
+</div>
+
+<div class="tv-frame">
+
+<video
+id="tvVideo"
+controls
+autoplay
+muted
+playsinline>
+</video>
+
+<iframe
+id="tvIframe"
+allowfullscreen
+allow="autoplay; encrypted-media"
+style="display:none;">
+</iframe>
+
+</div>
+
+<div style="font-size:0.7rem;text-align:center;margin-top:0.5rem;"
+id="channelLabel">
+
+Channel: RedBull TV
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="page2" class="page-hidden">
+
+<div class="result-page">
+
+<div class="result-header">
+
+<h2>
+<i class="fas fa-brain"></i>
+Exos+ Result
+</h2>
+
+<button id="backBtn" class="back-btn">
+Back
+</button>
+
+</div>
+
+<div id="resultContent" class="result-content">
+Waiting...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const MODEL = "gemini-2.5-flash";
+
+let currentImageBase64 = null;
+let currentMimeType = null;
+
+const channels = [
+
+{
+name:"RedBull TV",
+type:"hls",
+url:"https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8"
+},
+
+{
+name:"DW News",
+type:"hls",
+url:"https://dwamdstream103.akamaized.net/hls/live/2015525/dwstream103/index.m3u8"
+},
+
+{
+name:"NASA TV",
+type:"youtube",
+url:"https://www.youtube.com/embed/live_stream?channel=UCLA_DiR1FfKNvjuUpBHmylQ"
+}
+
+];
+
+let hlsPlayer = null;
+
+function changeChannel(index, element){
+
+document.querySelectorAll('.tv-tab')
+.forEach(tab=>tab.classList.remove('active'));
+
+element.classList.add('active');
+
+const channel = channels[index];
+
+const video = document.getElementById('tvVideo');
+
+const iframe = document.getElementById('tvIframe');
+
+document.getElementById('channelLabel').innerText =
+`Channel: ${channel.name}`;
+
+iframe.style.display = "none";
+video.style.display = "none";
+
+iframe.src = "";
+
+video.pause();
+
+if(hlsPlayer){
+
+hlsPlayer.destroy();
+hlsPlayer = null;
+
+}
+
+if(channel.type === "hls"){
+
+video.style.display = "block";
+
+if(Hls.isSupported()){
+
+hlsPlayer = new Hls();
+
+hlsPlayer.loadSource(channel.url);
+
+hlsPlayer.attachMedia(video);
+
+hlsPlayer.on(Hls.Events.MANIFEST_PARSED,function(){
+
+video.play().catch(()=>{});
+
+});
+
+}
+
+}else{
+
+iframe.style.display = "block";
+
+iframe.src = channel.url;
+
+}
+
+}
+
+window.addEventListener('load',()=>{
+
+changeChannel(0,document.querySelector('.tv-tab'));
+
+});
+
+document.getElementById('imageInput')
+.addEventListener('change',(e)=>{
+
+const file = e.target.files[0];
+
+const preview =
+document.getElementById('imagePreview');
+
+if(file){
+
+const reader = new FileReader();
+
+reader.onload = (ev)=>{
+
+preview.innerHTML =
+`<img src="${ev.target.result}"
+style="max-height:100px;border-radius:12px;">`;
+
+currentImageBase64 =
+ev.target.result.split(',')[1];
+
+currentMimeType = file.type;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+function updateDateTime(){
+
+const now = new Date();
+
+document.getElementById('datetime').innerHTML =
+now.toLocaleString();
+
+}
+
+updateDateTime();
+
+setInterval(updateDateTime,1000);
+
+async function fetchNews(){
+
+const newsList =
+document.getElementById('newsList');
+
+try{
+
+const res = await fetch(
+'https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/news/world/rss.xml'
+);
+
+const data = await res.json();
+
+newsList.innerHTML =
+data.items.slice(0,3).map(item=>`
+
+<li>
+
+<div class="news-title">
+${item.title}
+</div>
+
+</li>
+
+`).join('');
+
+}catch(e){
+
+newsList.innerHTML =
+'<li>News unavailable</li>';
+
+}
+
+}
+
+fetchNews();
+
+async function callGemini(
+prompt,
+apiKey,
+imageBase64,
+mimeType
+){
+
+let parts = [{ text: prompt }];
+
+if(imageBase64){
+
+parts.push({
+inline_data:{
+mime_type:mimeType,
+data:imageBase64
+}
+});
+
+}
+
+const payload = {
+
+contents:[{ parts }]
+
+};
+
+const response = await fetch(
+`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`,
+{
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify(payload)
+}
+);
+
+const data = await response.json();
+
+return data.candidates?.[0]?.content?.parts?.[0]?.text
+|| "No response";
+
+}
+
+const sendBtn =
+document.getElementById('sendBtn');
+
+const loading =
+document.getElementById('loadingIndicator');
+
+const resultContent =
+document.getElementById('resultContent');
+
+sendBtn.addEventListener('click',async()=>{
+
+const apiKey =
+document.getElementById('apiKeyInput').value.trim();
+
+const prompt =
+document.getElementById('userPrompt').value.trim();
+
+if(!apiKey){
+
+alert('Enter API Key');
+
+return;
+
+}
+
+loading.style.display='block';
+
+try{
+
+const result =
+await callGemini(
+prompt,
+apiKey,
+currentImageBase64,
+currentMimeType
+);
+
+resultContent.innerHTML =
+result.replace(/\n/g,'<br>');
+
+document.getElementById('page1')
+.classList.add('page-hidden');
+
+document.getElementById('page2')
+.classList.remove('page-hidden');
+
+}catch(err){
+
+alert(err.message);
+
+}
+
+loading.style.display='none';
+
+});
+
+document.getElementById('backBtn')
+.addEventListener('click',()=>{
+
+document.getElementById('page2')
+.classList.add('page-hidden');
+
+document.getElementById('page1')
+.classList.remove('page-hidden');
+
+});
+
+</script>
+
+</body>
+</html>
